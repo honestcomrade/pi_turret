@@ -43,6 +43,8 @@ class Stepper:
 
     steps = self.duration * 1000
 
+    f'Total Steps: {steps}'
+
     while stepCounter < steps:
     
       gpio.output(self.STP_PIN, True)
