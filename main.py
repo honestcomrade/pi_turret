@@ -1,4 +1,3 @@
-
 from Stepper import Stepper
 from time import sleep
 
@@ -6,9 +5,9 @@ EN_PIN  = 23
 STP_PIN = 27
 DIR_PIN = 22
 
+stepper = Stepper(23, 27, 22)
 
 def main():
-  stepper = Stepper(23, 27, 22)
   print("Setting Up...")
   stepper.step('left', 1)
   sleep(1)
