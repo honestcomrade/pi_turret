@@ -10,7 +10,6 @@ class Stepper:
     self.DIR_PIN = dir_pin
     self.interval = interval
     self.duration = duration
-
     self.__setup__()
 
 
@@ -54,31 +53,7 @@ class Stepper:
 
     # disable the motor
     gpio.output(self.EN_PIN, True)
-
-    # clean up the pins
-    gpio.cleanup()
-
-
-
     
 
-  # def main():
-  #   print("Setting Up...")
-  #   setup()
-  #   print("Running Right...")
-  #   run('right', 320, 1)
-  #   sleep(.5)
-  #   print("Running Left...")
-  #   run('left', 320, 1)
-  #   print("Ran...")
-  #   gpio.cleanup()
-  #   print("Cleaned Up...")
-  #   return
-
-  # if __name__ == "__main__":
-  #   try:
-  #     main()
-  #   except KeyboardInterrupt:
-  #     gpio.cleanup()
-  #     print("interrupted...")
-  #     pass
+  def cleanupPins(self): 
+    gpio.cleanup()
