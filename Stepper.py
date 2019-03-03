@@ -1,66 +1,78 @@
 from time import sleep
 import RPi.GPIO as gpio
 
+class Stepper:
 
-EN_PIN  = 23
-STP_PIN = 27
-DIR_PIN = 22
+  def __init__(self, en_pin, stp_pin, dir_pin, interval=.001, duration=1):
+    
+    self.EN_PIN = en_pin
+    self.STP_PIN = stp_pin
+    self.DIR_PIN = dir_pin
+    self.interval = interval
+    self.duration = duration
 
-def setup():
 
-  gpio.setmode(gpio.BCM)
-		
-  gpio.setup(STP_PIN, gpio.OUT)
-  gpio.setup(DIR_PIN, gpio.OUT)
-  gpio.setup(EN_PIN, gpio.OUT)
-  
-  gpio.output(EN_PIN, True)
-  gpio.output(DIR_PIN, False)
+  def __setup__(self):
 
-  return
+    # set the gpio mode
+    gpio.setmode(gpio.BCM)
 
-def run(direction, steps=3200, speed=1):
+    # set the pints to out mode
+    gpio.setup(self.STP_PIN, gpio.OUT)
+    gpio.setup(self.DIR_PIN, gpio.OUT)
+    gpio.setup(self.EN_PIN, gpio.OUT)
+    
+    # set the Enable pin to high, disabling the motor
+    gpio.output(self.EN_PIN, True)
 
-  gpio.output(EN_PIN, False) # activate motor
+  def step(self, direction, speed=1):
 
-  stepCounter = 0
-	
-  waitTime = .01
+    # activate motor
+    gpio.output(self.EN_PIN, False)
 
-  if direction is 'left':
-    gpio.output(DIR_PIN, True)
+    # set home position
+    stepCounter = 0
+    
+    waitTime = self.interval
 
-  while stepCounter < steps:
-  
-    gpio.output(STP_PIN, True)
-    sleep(waitTime)
-    gpio.output(STP_PIN, False)
-    sleep(waitTime)
-    stepCounter += 1
+    # set the Direction pin
+    if direction is "left":
+      gpio.output(self.DIR_PIN, False)
+    else:
+      gpio.output(self.DIR_PIN, True)
 
-    # once done, break
-  
+    steps = self.duration / 1000
 
-  gpio.output(EN_PIN, True)
-  return
+    while stepCounter < steps:
+    
+      gpio.output(self.STP_PIN, True)
+      sleep(waitTime)
+      gpio.output(self.STP_PIN, False)
+      sleep(waitTime)
+      stepCounter += 1
+    
 
-def main():
-  print("Setting Up...")
-  setup()
-  print("Running Right...")
-  run('right', 320, 1)
-  sleep(.5)
-  print("Running Left...")
-  run('left', 320, 1)
-  print("Ran...")
-  gpio.cleanup()
-  print("Cleaned Up...")
-  return
-
-if __name__ == "__main__":
-  try:
-    main()
-  except KeyboardInterrupt:
+    # disable the motor
+    gpio.output(self.EN_PIN, True)
     gpio.cleanup()
-    print("interrupted...")
-    pass
+
+  # def main():
+  #   print("Setting Up...")
+  #   setup()
+  #   print("Running Right...")
+  #   run('right', 320, 1)
+  #   sleep(.5)
+  #   print("Running Left...")
+  #   run('left', 320, 1)
+  #   print("Ran...")
+  #   gpio.cleanup()
+  #   print("Cleaned Up...")
+  #   return
+
+  # if __name__ == "__main__":
+  #   try:
+  #     main()
+  #   except KeyboardInterrupt:
+  #     gpio.cleanup()
+  #     print("interrupted...")
+  #     pass
