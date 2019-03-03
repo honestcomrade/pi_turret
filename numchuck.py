@@ -69,6 +69,6 @@ if __name__ =="__main__":
 #            movePlayer(nun,joyNow[y]) # move up or down
 #         joyLast[x] = joyNow[x]          
 #         joyLast[y] = joyNow[y]
-            time.delay(0.1)
+            time.sleep(0.1)
     except KeyboardInterrupt:
         pass    
