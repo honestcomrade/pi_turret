@@ -41,7 +41,8 @@ class Stepper:
     else:
       gpio.output(self.DIR_PIN, True)
 
-    steps = 200 / degrees
+    # 1.8 degrees per step
+    steps = degrees / 1.8
 
     print('Total Steps:{}'.format(steps))
 
