@@ -9,9 +9,9 @@ stepper = Stepper(23, 27, 22)
 
 def main():
   print("Setting Up...")
-  stepper.step('left', 1)
+  stepper.step('left', 90)
   sleep(1)
-  stepper.step('right', 2)
+  stepper.step('right', 180)
 
   print("Ran...")
   stepper.cleanupPins()
