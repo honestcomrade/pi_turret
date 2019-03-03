@@ -43,7 +43,7 @@ class Stepper:
 
     steps = self.duration * 1000
 
-    f'Total Steps: {steps}'
+    print('Total Steps:{}'.format(steps))
 
     while stepCounter < steps:
     
