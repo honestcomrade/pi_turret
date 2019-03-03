@@ -10,16 +10,13 @@ import time
 
 class nunchuck(object):
     
-    def __init__(self, pin):
+    def __init__(self):
         self.address = 0x52
+        self.i2c_bus = 1 #0, 1 ?
     
     def setup(self):
         print("Initialise I2C")
-        if gpio.RPI_REVISION == 1:
-            i2c_bus = 0
-        else :
-            i2c_bus = 1
-        self.bus = SMBus(i2c_bus)
+        self.bus = SMBus(self.i2c_bus)
         #init nunchuck
         self.bus.write_byte_data(self.address, 0x40, 0x00)
       
