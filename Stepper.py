@@ -42,7 +42,7 @@ class Stepper:
     else:
       gpio.output(self.DIR_PIN, True)
 
-    steps = self.duration / 1000
+    steps = self.duration * 1000
 
     while stepCounter < steps:
     
