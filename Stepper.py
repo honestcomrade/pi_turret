@@ -11,6 +11,8 @@ class Stepper:
     self.interval = interval
     self.duration = duration
 
+    self.__setup__()
+
 
   def __setup__(self):
 
@@ -26,7 +28,6 @@ class Stepper:
     gpio.output(self.EN_PIN, True)
 
   def step(self, direction, speed=1):
-
     # activate motor
     gpio.output(self.EN_PIN, False)
 
@@ -49,12 +50,17 @@ class Stepper:
       sleep(waitTime)
       gpio.output(self.STP_PIN, False)
       sleep(waitTime)
-      stepCounter += 1
-    
+      stepCounter += 1  
 
     # disable the motor
     gpio.output(self.EN_PIN, True)
+
+    # clean up the pins
     gpio.cleanup()
+
+
+
+    
 
   # def main():
   #   print("Setting Up...")
