@@ -26,7 +26,7 @@ class Stepper:
     # set the Enable pin to high, disabling the motor
     gpio.output(self.EN_PIN, True)
 
-  def step(self, direction, duration=1):
+  def step(self, direction, degrees=90):
     # activate motor
     gpio.output(self.EN_PIN, False)
 
@@ -41,7 +41,7 @@ class Stepper:
     else:
       gpio.output(self.DIR_PIN, True)
 
-    steps = duration * 1000
+    steps = degrees
 
     print('Total Steps:{}'.format(steps))
 
