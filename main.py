@@ -5,7 +5,7 @@ EN_PIN  = 23
 STP_PIN = 27
 DIR_PIN = 22
 
-stepper = Stepper.stepper(23, 27 22)
+stepper = Stepper(23, 27, 22)
 
 def main():
   print("Setting Up...")
