@@ -3,7 +3,7 @@ import RPi.GPIO as gpio
 
 class Stepper:
 
-  def __init__(self, en_pin, stp_pin, dir_pin, interval=1):
+  def __init__(self, en_pin, stp_pin, dir_pin, interval=.001):
     
     self.EN_PIN = en_pin
     self.STP_PIN = stp_pin
@@ -41,7 +41,7 @@ class Stepper:
     else:
       gpio.output(self.DIR_PIN, True)
 
-    steps = degrees
+    steps = 200 / degrees
 
     print('Total Steps:{}'.format(steps))
 
