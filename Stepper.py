@@ -3,7 +3,7 @@ import RPi.GPIO as gpio
 
 class Stepper:
 
-  def __init__(self, en_pin, stp_pin, dir_pin, interval=.001):
+  def __init__(self, en_pin, stp_pin, dir_pin, interval=1):
     
     self.EN_PIN = en_pin
     self.STP_PIN = stp_pin
