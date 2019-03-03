@@ -3,13 +3,13 @@ import RPi.GPIO as gpio
 
 class Stepper:
 
-  def __init__(self, en_pin, stp_pin, dir_pin, interval=.001, duration=1):
+  def __init__(self, en_pin, stp_pin, dir_pin, interval=.001):
     
     self.EN_PIN = en_pin
     self.STP_PIN = stp_pin
     self.DIR_PIN = dir_pin
     self.interval = interval
-    self.duration = duration
+    # self.duration = duration
     self.__setup__()
 
 
@@ -26,7 +26,7 @@ class Stepper:
     # set the Enable pin to high, disabling the motor
     gpio.output(self.EN_PIN, True)
 
-  def step(self, direction, speed=1):
+  def step(self, direction, degrees=90):
     # activate motor
     gpio.output(self.EN_PIN, False)
 
@@ -41,7 +41,10 @@ class Stepper:
     else:
       gpio.output(self.DIR_PIN, True)
 
-    steps = self.duration * 1000
+    # 1.8 degrees per step
+    steps = degrees / 1.8
+
+    print('Total Steps:{}'.format(steps))
 
     while stepCounter < steps:
     
