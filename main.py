@@ -15,7 +15,7 @@ def main():
   stepper.step('right', 2)
 
   print("Ran...")
-
+  stepper.cleanupPins()
 
 
 if __name__ == "__main__":
