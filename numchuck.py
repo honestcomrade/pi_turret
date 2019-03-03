@@ -13,7 +13,8 @@ class nunchuck(object):
     def __init__(self):
         self.address = 0x52
         self.i2c_bus = 1 #0, 1 ?
-    
+        self.setup()
+
     def setup(self):
         print("Initialise I2C")
         self.bus = SMBus(self.i2c_bus)
@@ -46,7 +47,7 @@ class nunchuck(object):
 #            z = nCk [5] & 0x01;
             return nCk
     
-
+    
 if __name__ =="__main__":
     mynunchuck = nunchuck()
     joylast=[-1]*4
